@@ -8,6 +8,7 @@ public class Factorial {
 			System.out.println("Enter a number:");
 			int n = scr.nextInt();
 			int fact=1;
+
 			for (int i = 1; i <=n; i++) {
 				fact*=i;				
 			}
