@@ -15,7 +15,7 @@ public class GoDown {
 		}
 		return g;
 	}
-
+	
 	public synchronized void purchase(int amt)
 	{
 		while(amt>noOfItems)
@@ -28,20 +28,19 @@ public class GoDown {
 //			}
 			
 			try {
-				this.wait(500);
+				this.wait(500,50);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
 		}
 		noOfItems=noOfItems-amt;
 		System.out.println("Purchase Made");
 	}
 
-	public synchronized void update(int amt) {
+	public synchronized void update(int amt) 
+	{
 		noOfItems=noOfItems+amt;
 		System.out.println("Products Updated");
-		
+  		this.notify();
 	}
 }
