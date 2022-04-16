@@ -40,19 +40,19 @@ public class GroupEx2 {
 	public static void main(String[] args) {
 		
 		ThreadGroup tg1 = new ThreadGroup("Old Airport Branch");
-		ThreadGroup tg2 = new ThreadGroup("New Airport Branch");
-		tg1.setMaxPriority(4);
+		ThreadGroup tg2 = new ThreadGroup(tg1,"New Airport Branch");
+//		tg1.setMaxPriority(4);
 		
 		Thread t1=new Airport(tg1 , "flight 1");
-		Thread t2=new Airport(tg2 , "flight 2");
-//		tg1.setMaxPriority(4);threads above this wont be affected but after would be affected
-		t1.start();
-		t2.start();
+		Thread t2=new Airport(tg1 , "flight 2");
+		tg1.setMaxPriority(4);// threads above this wont be affected but after would be affected
 		
 		Runnable w =new  Railway();
 		Thread r1 = new Thread(tg1,w,"Train 1");
-		r1.setPriority(2);
-		Thread r2 = new Thread(tg2,w,"Train 2");
+		r1.setPriority(8);
+		Thread r2 = new Thread(tg1,w,"Train 2");
+		t1.start();
+		t2.start();
 		r1.start();
 		r2.start();
 		
@@ -62,7 +62,7 @@ public class GroupEx2 {
 		System.out.println(tg1.getMaxPriority());
 		System.out.println(tg1.activeCount());
 		try {
-			Thread.sleep(500);
+			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -76,7 +76,9 @@ public class GroupEx2 {
 		
 //		tg1.stop();
 		
-		System.out.println( );
-		
+		System.out.println(tg1.getMaxPriority());
+		System.out.println(tg2.getMaxPriority());
+		tg2.destroy();
+		Thread r3 = new Thread(tg2,w,"Train 2");
 	}
 }

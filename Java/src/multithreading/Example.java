@@ -4,7 +4,7 @@ class Husband extends Thread
 {
 	public void run()
 	{
-		Account h=Account.getObject();
+		Account2 h=Account2.getObject();
 		h.deposite(1000);
 	}
 	
@@ -14,7 +14,7 @@ class Wife extends Thread
 {
 	public void run()
 	{
-		Account w=Account.getObject();
+		Account2 w=Account2.getObject();
 		w.deposite(1000);
 	}
 }
@@ -38,7 +38,7 @@ public class Example
 			e.printStackTrace();
 		}
 		
-		Account acc=Account.getObject();
+		Account2 acc=Account2.getObject();
 		acc.balanceCheck();
 	}
 
