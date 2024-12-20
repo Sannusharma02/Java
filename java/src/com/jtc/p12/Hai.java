@@ -8,5 +8,5 @@ public class Hai {
 		Hello h1=new Hello();
 		h1.m1();
 		}
-
+ 
 }
