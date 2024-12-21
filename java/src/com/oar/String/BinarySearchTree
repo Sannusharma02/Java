@@ -19,7 +19,7 @@ public class BinarySearchTree{
 
 	public void add(int key){
 
-		root = addNode(root,key);
+		root = addDistinctNode(root,key);
 	}
 	
 	private Node addNode(Node n, int key){
@@ -40,10 +40,13 @@ public class BinarySearchTree{
 		if(n==null){
 			return new Node(key);
 		}
+  		if (key == n.key) {	
+        		return n;
+    		}
 		if(key < n.key){
-			n.left = addNode(n.left, key);
-		}else if(key > n.key){
-			n.right = addNode(n.right, key);
+			n.left = addDistinctNode(n.left, key);
+		}else {
+			n.right = addDistinctNode(n.right, key);
 		}
 		return n;
 	}
@@ -106,7 +109,7 @@ public class BinarySearchTree{
 		bst.add(40);
 		bst.add(80);
 		bst.add(30);
-		bst.add(50);
+		bst.add(30);
 		bst.add(25);
 		bst.add(35);
 		bst.add(75);
