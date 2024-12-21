@@ -1,0 +1,108 @@
+import java.util.LinkedList;
+import java.util.Queue;
+
+class Node{
+	
+	int key;
+	Node left, right;
+
+	public Node(int key){
+	this.key = key;
+	this.left = null;
+	this.right =null;
+	}
+}
+
+public class BinarySearchTree{
+	
+	Node root = null;
+
+	public void add(int key){
+
+		root = addNode(root,key);
+	}
+	
+	private Node addNode(Node n, int key){
+
+		if(n==null){
+			return new Node(key);
+		}
+		if(key < n.key){
+			n.left = addNode(n.left, key);
+		}else{
+			n.right = addNode(n.right, key);
+		}
+		return n;
+	}	
+
+	public void levelOrderTraversal(){
+
+		if(root == null) return;
+
+		Queue<Node> q = new LinkedList();
+		q.add(root);
+		while(!q.isEmpty()){
+			Node n =q.poll();
+			System.out.print(n.key + " ");
+			if(n.left!=null) q.add(n.left);
+			if(n.right!=null) q.add(n.right);
+		}	
+		System.out.println();		
+	}
+
+	public void inOrderTraversal(){
+		printInOrder(root);
+		System.out.println();
+	}
+
+	private void printInOrder(Node n){
+		if(n==null) return;
+		printInOrder(n.left);
+		System.out.print(n.key+" "); 
+		printInOrder(n.right);	
+	}
+
+	public void PreOrderTraversal(){
+		printPreOrder(root);
+		System.out.println();
+	}
+
+	private void printPreOrder(Node n){
+		if(n==null) return;
+		System.out.print(n.key+" ");		
+		printPreOrder(n.left);
+		printPreOrder(n.right);	
+	}
+
+	public void PostOrderTraversal(){
+		printPostOrder(root);
+		System.out.println();
+	}
+
+	private void printPostOrder(Node n){
+		if(n==null) return;	
+		printPostOrder(n.left);
+		printPostOrder(n.right);
+		System.out.print(n.key+" ");		
+	}
+
+	public static void main(String [] args){
+		BinarySearchTree bst = new BinarySearchTree();
+		bst.add(60);
+		bst.add(40);
+		bst.add(80);
+		bst.add(30);
+		bst.add(50);
+		bst.add(25);
+		bst.add(35);
+		bst.add(75);
+		System.out.print("Level-order Traversal: ");
+		bst.levelOrderTraversal();
+		System.out.print("In-order Traversal: ");
+		bst.inOrderTraversal();
+		System.out.print("Pre-order Traversal: ");
+		bst.PreOrderTraversal();
+		System.out.print("Post-order Traversal: ");
+		bst.PostOrderTraversal();
+	}
+}
